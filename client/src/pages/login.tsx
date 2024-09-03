@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "next/router";
+import { useAppContext } from "@/context";
 
 interface IFormInput {
   email: string;
@@ -12,6 +13,8 @@ interface IFormInput {
 
 export default function Login() {
   const router = useRouter();
+  const { name, setName } = useAppContext();
+
   const loginSchema = Yup.object().shape({
     email: Yup.string().required("Email is required"),
     password: Yup.string()
@@ -26,20 +29,20 @@ export default function Login() {
   } = useForm<IFormInput>({
     resolver: yupResolver(loginSchema),
     defaultValues: {
-      email: "sert@test.com",
-      password: "1234",
+      email: "",
+      password: "",
     },
   });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    
+
     const { email, password } = data;
     try {
-    //   const result:any = await signIn('credentials', {
-    //     redirect: false,
-    //     email,
-    //     password,
-    //   })
+      //   const result:any = await signIn('credentials', {
+      //     redirect: false,
+      //     email,
+      //     password,
+      //   })
 
       // if (result.error) {
       //   console.error(result.error)
@@ -69,7 +72,7 @@ export default function Login() {
               placeholder="Enter Your Name"
             />
             <div className="w-2/12 flex items-center justify-center">
-              <FaUser/>
+              <FaUser />
             </div>
           </div>
           {errors.email && (
@@ -84,7 +87,7 @@ export default function Login() {
               placeholder="Enter Your Password"
             />
             <div className="w-2/12 flex items-center justify-center">
-              <FaLock/>
+              <FaLock />
             </div>
           </div>
           {errors.password && (
@@ -94,10 +97,10 @@ export default function Login() {
           <div className="mx-5 flex items-center justify-end cursor-pointer tracking-wider text-xs">
             <p>forgot password</p>
           </div>
-          <div className="mx-5 my-7 py-2">
+          <div className="flex justify-center p-5">
             <button
               type="submit"
-              className="bg-black w-full h-[35px] text-white"
+              className="btn btn-wide"
             >
               Login
             </button>
@@ -114,7 +117,7 @@ export default function Login() {
           </div>
           <div
             onClick={() => router.push("/register")}
-            className="mx-5 my-5 py-2 flex items-center justify-center cursor-pointer"
+            className="flex items-center justify-center cursor-pointer"
           >
             <p className="text-sm">Don't have an account? / Register</p>
           </div>

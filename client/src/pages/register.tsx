@@ -92,8 +92,8 @@ export default function Register() {
             <p className="text-red-500 mx-5">{errors.password.message}</p>
           )}
 
-          <div className="mx-5 my-7 py-2">
-            <button className="bg-black w-full h-[35px] text-white">
+          <div className="flex justify-center p-5">
+            <button className="btn btn-wide">
               Register
             </button>
 
